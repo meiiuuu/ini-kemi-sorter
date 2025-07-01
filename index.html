@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>美羽ちゃんのINIケミソート</title>
+<style>
+  body { font-family: 'Arial', sans-serif; background:#f5f5f5; color:#333; margin:0; padding:20px;}
+  h1 { text-align:center; color:#6a2c70; }
+  .container { max-width:600px; margin:0 auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+  button { background:#6a2c70; color:#fff; border:none; padding:12px 24px; margin:12px 6px; border-radius:8px; font-size:1.1rem; cursor:pointer; }
+  button:hover { background:#4a1c50; }
+  .pair { font-weight:bold; font-size:1.2rem; margin:12px 0; text-align:center; }
+  .result { margin-top:24px; font-size:1.3rem; font-weight:bold; color:#6a2c70; text-align:center; }
+  .footer { margin-top:40px; font-size:0.9rem; text-align:center; color:#999; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>美羽ちゃんのINIケミソート</h1>
+    <div id="pair" class="pair"></div>
+    <div style="text-align:center;">
+      <button id="btnA"></button>
+      <button id="btnB"></button>
+    </div>
+    <div id="result" class="result"></div>
+    <div class="footer">ちゃっちゃんプロデュース</div>
+  </div>
+
+<script>
+  const kemis = [
+    "キム西", "フェン西", "たじ西", "ひろひろ", "おにボ", "おざ西", "西牧", "佐野西", "りひろと", "西松屋",
+    "まさフェン", "まさたじ", "きむろむ", "キムチ", "ましゃたく", "キム牧", "トト兄弟", "りひまさ", "チュッチュ",
+    "ふぁんたじー", "フェンろむ", "ふぁんける", "フェンたく", "フェン牧", "佐野フェン", "フェンりひ", "フェン迅",
+    "たじろむ", "たじ千代", "たじたく", "たじ牧", "佐野たじ", "りひたじ", "たじん", "ちーろむ", "たくろむ",
+    "髙牧", "佐野ろむ", "りひろむ", "迅ろむ", "たけたく", "千代牧", "
