@@ -72,64 +72,64 @@
   </div>
 
 <script>
-  const kemis = [
-    "キム西", "フェン西", "たじ西", "ひろひろ", "おにボ", "おざ西", "西牧", "佐野西", "りひろと", "西松屋",
-    "まさフェン", "まさたじ", "きむろむ", "キムチ", "ましゃたく", "キム牧", "トト兄弟", "りひまさ", "チュッチュ",
-    "ふぁんたじー", "フェンろむ", "ふぁんける", "フェンたく", "フェン牧", "佐野フェン", "フェンりひ", "フェン迅",
-    "たじろむ", "たじ千代", "たじたく", "たじ牧", "佐野たじ", "りひたじ", "たじん", "ちーろむ", "たくろむ",
-    "髙牧", "佐野ろむ", "りひろむ", "迅ろむ", "たけたく", "千代牧",  "大尊", "りひ千代", "まつたけ", "おざ牧", "佐野たく", "ざきざき", "迅たく", 
-    "佐野牧", "りひ牧", "きょじん", "佐野りひ", "佐野迅", "マンネズ"
-  ];
+  window.onload = function () {
+    const kemis = [
+      "キム西", "フェン西", "たじ西", "ひろひろ", "おにボ", "おざ西", "西牧", "佐野西", "りひろと", "西松屋",
+      "まさフェン", "まさたじ", "きむろむ", "キムチ", "ましゃたく", "キム牧", "トト兄弟", "りひまさ", "チュッチュ",
+      "ふぁんたじー", "フェンろむ", "ふぁんける", "フェンたく", "フェン牧", "佐野フェン", "フェンりひ", "フェン迅",
+      "たじろむ", "たじ千代", "たじたく", "たじ牧", "佐野たじ", "りひたじ", "たじん", "ちーろむ", "たくろむ",
+      "髙牧", "佐野ろむ", "りひろむ", "迅ろむ", "たけたく", "千代牧",  "大尊", "りひ千代", "まつたけ", "おざ牧", "佐野たく", "ざきざき", "迅たく", 
+      "佐野牧", "りひ牧", "きょじん", "佐野りひ", "佐野迅", "マンネズ"
+    ];
 
-  let pairs = [];
-  let current = 0;
-  let results = [];
+    let pairs = [];
+    let current = 0;
+    let results = [];
 
-  // ペアをすべて作成（全組み合わせ）
-  for (let i = 0; i < kemis.length; i++) {
-    for (let j = i + 1; j < kemis.length; j++) {
-      pairs.push([kemis[i], kemis[j]]);
+    for (let i = 0; i < kemis.length; i++) {
+      for (let j = i + 1; j < kemis.length; j++) {
+        pairs.push([kemis[i], kemis[j]]);
+      }
     }
-  }
 
-  // ランダムにシャッフル
-  pairs = pairs.sort(() => Math.random() - 0.5);
+    pairs = pairs.sort(() => Math.random() - 0.5);
 
-  function showNextPair() {
-    if (current >= pairs.length) {
-      showResults();
-      return;
+    function showNextPair() {
+      if (current >= pairs.length) {
+        showResults();
+        return;
+      }
+      const pair = pairs[current];
+      document.getElementById("pair").innerText = `${pair[0]} vs ${pair[1]}`;
+      document.getElementById("btnA").innerText = pair[0];
+      document.getElementById("btnB").innerText = pair[1];
     }
-    const pair = pairs[current];
-    document.getElementById("pair").innerText = `${pair[0]} vs ${pair[1]}`;
-    document.getElementById("btnA").innerText = pair[0];
-    document.getElementById("btnB").innerText = pair[1];
-  }
 
-  function choose(winner) {
-    results.push(winner);
-    current++;
+    function choose(winner) {
+      results.push(winner);
+      current++;
+      showNextPair();
+    }
+
+    function showResults() {
+      const counts = {};
+      results.forEach(k => {
+        counts[k] = (counts[k] || 0) + 1;
+      });
+
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+      const resultText = sorted.map(([k, c], i) => `${i + 1}. ${k}（${c}票）`).join('\n');
+      document.getElementById("result").innerText = "あなたの推しケミランキング💖\n\n" + resultText;
+      document.getElementById("pair").innerText = "";
+      document.getElementById("btnA").style.display = "none";
+      document.getElementById("btnB").style.display = "none";
+    }
+
+    document.getElementById("btnA").onclick = () => choose(pairs[current][0]);
+    document.getElementById("btnB").onclick = () => choose(pairs[current][1]);
+
     showNextPair();
-  }
-
-  function showResults() {
-    const counts = {};
-    results.forEach(k => {
-      counts[k] = (counts[k] || 0) + 1;
-    });
-
-    const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const resultText = sorted.map(([k, c], i) => `${i + 1}. ${k}（${c}票）`).join('\n');
-    document.getElementById("result").innerText = "あなたの推しケミランキング💖\n\n" + resultText;
-    document.getElementById("pair").innerText = "";
-    document.getElementById("btnA").style.display = "none";
-    document.getElementById("btnB").style.display = "none";
-  }
-
-  document.getElementById("btnA").onclick = () => choose(pairs[current][0]);
-  document.getElementById("btnB").onclick = () => choose(pairs[current][1]);
-
-  showNextPair();
+  };
 </script>
 </body>
 </html>
