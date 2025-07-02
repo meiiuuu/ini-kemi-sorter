@@ -103,6 +103,10 @@
       document.getElementById("pair").innerText = `${pair[0]} vs ${pair[1]}`;
       document.getElementById("btnA").innerText = pair[0];
       document.getElementById("btnB").innerText = pair[1];
+
+      // 進捗バー表示
+      const percent = Math.floor((current / pairs.length) * 100);
+      document.getElementById("progress").innerText = `進捗：${percent}% 完了！`;
     }
 
     function choose(winner) {
@@ -123,6 +127,7 @@
       document.getElementById("pair").innerText = "";
       document.getElementById("btnA").style.display = "none";
       document.getElementById("btnB").style.display = "none";
+      document.getElementById("progress").style.display = "none";
     }
 
     document.getElementById("btnA").onclick = () => choose(pairs[current][0]);
@@ -131,5 +136,3 @@
     showNextPair();
   };
 </script>
-</body>
-</html>
